@@ -9,9 +9,6 @@ CoRe is a lightweight test-time adaptation framework for multivariate time serie
 ## Quick Start
 
 ```bash
-Download the anonymized source code from:
-https://anonymous.4open.science/r/CoRe-TTA-CD98
-
 Extract the downloaded archive and follow the installation instructions below.
 
 cd CoRe-TTA
