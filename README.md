@@ -20,8 +20,6 @@ Prepare the datasets under `./data/` and place a pretrained backbone checkpoint 
 ./checkpoints/<BACKBONE>/<DATASET>_<HORIZON>/checkpoint_best.pth
 ```
 
-**Important:** The existing checkpoint loader does not raise an error when the checkpoint is missing. Before running adaptation, verify that the specified `checkpoint_best.pth` actually exists; otherwise, results may be obtained from an untrained backbone.
-
 ## Run CoRe
 
 Example: DLinear on Exchange Rate, prediction horizon 720.
