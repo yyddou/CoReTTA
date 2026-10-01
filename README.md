@@ -103,10 +103,13 @@ This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS), which ide
 If you use this work, please cite:
 
 ```bibtex
-@article{deng2026core,
-  title={Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting},
-  author={Deng, Yuanyuan and Pechenizkiy, Mykola and Deng, Songgaojun},
-  journal={arXiv preprint arXiv:2609.34638},
-  year={2026}
+@misc{deng2026correctionspacecrossvariateinteractiontesttime,
+      title={Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting}, 
+      author={Yuanyuan Deng and Mykola Pechenizkiy and Songgaojun Deng},
+      year={2026},
+      eprint={2609.34638},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2609.34638}, 
 }
 ```
