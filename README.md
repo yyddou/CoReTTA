@@ -110,9 +110,9 @@ The benchmark datasets (ETT, Weather, Exchange Rate, Electricity, and Traffic) c
 
 The repository also includes baseline implementations. The adapter is selected by the `RESULT_DIR` prefix in `main.py` (for example `COSA`, `PETSA`, `DYNATTA`, or `TAFAS`). Use the same pretrained checkpoint and experimental protocol for comparisons.
 
-## Code provenance and licensing
+## Acknowledgements and Licensing
 
-This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS), which identifies its license as **Modified MIT License (Non-Commercial with Permission)**. It also includes implementations of other test-time adaptation baselines. Please review the original projects' licenses and permission requirements before reusing or redistributing third-party code. A repository-wide license for the combined codebase is not asserted here.
+This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS) and [COSA](https://github.com/bigbases/COSA_ICLR2026). Please refer to the original repositories for their respective licenses and usage restrictions.
 
 ## Citation
 
