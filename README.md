@@ -10,11 +10,17 @@ Across seven backbones, six datasets, and four prediction horizons, **CoRe reduc
 
 ## Overview
 
-![Prediction-space vs. correction-space interaction](correction_vs_prediction.png)
+<p align="center">
+  <img src="correction_vs_prediction.png" alt="Prediction-space vs. correction-space interaction" width="520">
+</p>
 
-## Why Correction Space?
+## Correction-space Interaction: Theory and Evidence
 
-![Correction-space vs. prediction-space interaction across prediction horizons](interaction_space_results.png)
+**Proposition 1** in the [paper](https://arxiv.org/abs/2609.34638) formalizes the direct pathway for mixing uncorrected backbone errors in prediction-space interaction. The controlled comparison below complements this analysis by evaluating the two interaction spaces under the same bottleneck architecture.
+
+<p align="center">
+  <img src="interaction_space_results.png" alt="Correction-space vs. prediction-space interaction across prediction horizons" width="560">
+</p>
 
 ## Setup
 
