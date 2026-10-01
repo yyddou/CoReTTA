@@ -112,7 +112,7 @@ The repository also includes baseline implementations. The adapter is selected b
 
 ## Acknowledgements and Licensing
 
-This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS) (**Modified MIT License**) and [COSA](https://github.com/bigbases/COSA_ICLR2026) (**MIT License**). These restrictions apply to the respective third-party code; no repository-wide license is asserted for the combined codebase.
+This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS) (Modified MIT License: commercial use requires prior written permission) and [COSA](https://github.com/bigbases/COSA_ICLR2026). **COSA's `LICENSE` file specifies CC BY-NC-SA 4.0, while its README describes MIT with commercial-use permission required.** Both notices restrict commercial use; please seek clarification from COSA's authors about the discrepancy. No single repository-wide license is asserted for this combined codebase.
 
 ## Citation
 
