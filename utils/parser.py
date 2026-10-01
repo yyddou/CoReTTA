@@ -17,7 +17,7 @@ from config import get_cfg_defaults
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="TAFAS: Test-time adaptation of time-series forecasters"
+        description="CoRe: Correction-space interaction for test-time adaptation of time-series forecasters"
     )
     parser.add_argument(
         "--cfg",
