@@ -6,6 +6,8 @@ Official implementation of **CoRe (Correction-space Interaction Refinement)**.
 
 CoRe studies **where cross-variate interaction should take place** in test-time adaptation. Rather than mixing backbone predictions, it performs interaction in the **correction space**, avoiding direct mixing of uncorrected backbone errors across variates. We demonstrate this principle through a simple, parameter-efficient implementation.
 
+Across seven backbones, six datasets, and four prediction horizons, **CoRe reduces MSE by 25.82% on average over frozen backbones and by 10.57% over COSA**, with stronger gains at medium-to-long horizons and modest computational overhead.
+
 ## Setup
 
 Install the dependencies listed in `requirements.txt` in a compatible Python/PyTorch environment with CUDA support.
