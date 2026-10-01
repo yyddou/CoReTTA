@@ -100,7 +100,7 @@ This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS), which ide
 
 ## Citation
 
-If you use this work, please cite:
+If you find this work useful, please consider citing our paper:
 
 ```bibtex
 @misc{deng2026correctionspacecrossvariateinteractiontesttime,
