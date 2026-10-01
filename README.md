@@ -1,10 +1,10 @@
-# CoRe: Correction-space Interaction Refinement
+# CoRe: Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting
 
-Official implementation of **CoRe: Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting**.
+Official implementation of **CoRe (Correction-space Interaction Refinement)**.
 
 **Paper:** [arXiv:2609.34638](https://arxiv.org/abs/2609.34638)
 
-CoRe performs cross-variate interaction on *adapter corrections*, rather than directly on frozen-backbone predictions. It combines **Shared-anchor Correction Refinement (SCR)** with **input-conditioned spectral gating**. The implementation builds on the COSA base adapter and the TAFAS codebase.
+CoRe studies **where cross-variate interaction should take place** in test-time adaptation. Rather than mixing backbone predictions, it performs interaction in the **correction space**, avoiding direct mixing of uncorrected backbone errors across variates. We demonstrate this principle through a simple, parameter-efficient implementation.
 
 ## Setup
 
