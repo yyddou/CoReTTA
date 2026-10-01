@@ -88,7 +88,7 @@ The SCR bottleneck defaults to rank `r = C` (number of variates). The implementa
 
 The main paper evaluates **seven backbones** (DLinear, FreTS, OLS, PatchTST, iTransformer, MICN, Informer), **six datasets** (ETTh1, ETTh2, ETTm1, ETTm2, Weather, Exchange Rate), and prediction horizons `96`, `192`, `336`, and `720`. Electricity and Traffic are additionally used for scalability experiments.
 
-The dataset files are not included in this repository. Supply the benchmark files in the layout expected by `datasets/build.py`. The paper specifies the evaluation protocol and the full results.
+The benchmark datasets (ETT, Weather, Exchange Rate, Electricity, and Traffic) can be downloaded from the [Google Drive dataset collection](https://drive.google.com/drive/folders/13Cg1KYOlzM5C7K8gK8NfC-F3EYxkM3D2?usp=sharing) linked by [Time-Series-Library](https://github.com/thuml/Time-Series-Library). Place the downloaded files under `./data/` following the layout expected by `datasets/build.py`. The paper specifies the evaluation protocol and full results.
 
 ### Baselines
 
