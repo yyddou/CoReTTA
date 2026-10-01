@@ -8,6 +8,14 @@ CoRe studies **where cross-variate interaction should take place** in test-time 
 
 Across seven backbones, six datasets, and four prediction horizons, **CoRe reduces MSE by 25.82% on average over frozen backbones and by 10.57% over COSA**, with stronger gains at medium-to-long horizons and modest computational overhead.
 
+## Overview
+
+![Prediction-space vs. correction-space interaction](correction_vs_prediction.png)
+
+## Why Correction Space?
+
+![Correction-space vs. prediction-space interaction across prediction horizons](interaction_space_results.png)
+
 ## Setup
 
 Install the dependencies listed in `requirements.txt` in a compatible Python/PyTorch environment with CUDA support.
