@@ -1,20 +1,32 @@
-# CoRe: Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting
+# CoRe: Correction-space Interaction Refinement
 
-This is the official code repository for the paper **CoRe: Cross-variate Correction-space Interaction for Test-time Adaptation in Time Series Forecasting**.
+Official implementation of **CoRe: Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting**.
 
-## Overview
+**Paper:** [arXiv:2609.34638](https://arxiv.org/abs/2609.34638)
 
-CoRe is a lightweight test-time adaptation framework for multivariate time series forecasting. It augments a frozen pretrained backbone with a learnable adapter that predicts residual corrections, refined via Shared-shift Correction Refinement (SCR), a structured cross-variate interaction module operating in the correction space.
+CoRe performs cross-variate interaction on *adapter corrections*, rather than directly on frozen-backbone predictions. It combines **Shared-anchor Correction Refinement (SCR)** with **input-conditioned spectral gating**. The implementation builds on the COSA base adapter and the TAFAS codebase.
 
-## Quick Start
+## Setup
+
+Install the dependencies listed in `requirements.txt` in a compatible Python/PyTorch environment with CUDA support. The CoRe adapter currently uses `.cuda()`, so running it requires a CUDA-enabled PyTorch installation and a suitable GPU.
 
 ```bash
-Extract the downloaded archive and follow the installation instructions below.
-
-cd CoRe-TTA
-
 pip install -r requirements.txt
+```
 
+Prepare the datasets under `./data/` and place a pretrained backbone checkpoint at:
+
+```text
+./checkpoints/<BACKBONE>/<DATASET>_<HORIZON>/checkpoint_best.pth
+```
+
+**Important:** The existing checkpoint loader does not raise an error when the checkpoint is missing. Before running adaptation, verify that the specified `checkpoint_best.pth` actually exists; otherwise, results may be obtained from an untrained backbone.
+
+## Run CoRe
+
+Example: DLinear on Exchange Rate, prediction horizon 720.
+
+```bash
 python main.py \
   DATA.NAME exchange_rate \
   DATA.PRED_LEN 720 \
@@ -24,26 +36,15 @@ python main.py \
   TRAIN.CHECKPOINT_DIR ./checkpoints/DLinear/exchange_rate_720/ \
   TTA.ENABLE True \
   RESULT_DIR results/CORE/ \
-
   TTA.COSA.STEPS 20 \
   TTA.CORE.GATE_BIAS_INIT -1.0
 ```
 
-Expected output: `adapt_test_mse=0.1213, adapt_test_mae=0.2487`
+This command is an **illustrative single run**. Paper results are reported under the evaluation protocol described in the manuscript, including averages over random seeds where indicated. Do not compare a single-run MSE directly with a multi-seed average.
 
-## Requirements
+### Train a backbone
 
-```bash
-pip install -r requirements.txt
-```
-
-## Data Preparation
-
-Download datasets (ETTh1, ETTh2, ETTm1, ETTm2, Weather, Exchange-Rate, Traffic, Electricity, Traffic, Electricity) and place them under `./data/`.
-
-## Usage
-
-### Training a backbone
+If a pretrained checkpoint is not available, train the corresponding backbone first:
 
 ```bash
 python main.py \
@@ -54,9 +55,7 @@ python main.py \
   TRAIN.CHECKPOINT_DIR ./checkpoints/DLinear/ETTh1_96/
 ```
 
-### Test-time adaptation with CoRe
-
-After training a backbone, run TTA with CoRe (example for DLinear on ETTh1, pred_len=96):
+Then run CoRe using the same dataset, backbone, horizon, and checkpoint directory:
 
 ```bash
 python main.py \
@@ -68,34 +67,50 @@ python main.py \
   TRAIN.CHECKPOINT_DIR ./checkpoints/DLinear/ETTh1_96/ \
   TTA.ENABLE True \
   RESULT_DIR results/CORE/ \
-
   TTA.COSA.STEPS 20 \
   TTA.CORE.GATE_BIAS_INIT -1.0
 ```
 
-The result directory will be automatically set to `results/CORE/DLinear/ETTh1_96/`. For a ready-to-run example without training, see Quick Start above.
+The result directory is extended with the checkpoint-directory suffix by `main.py`.
+
+## Configuration
+
+CoRe reuses the **base-adapter settings under `TTA.COSA`**, while CoRe-specific SCR settings are under `TTA.CORE`.
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `DATA.SEQ_LEN` | `96` | Lookback length |
+| `TTA.COSA.STEPS` | `20` | Adaptation steps |
+| `TTA.COSA.BATCH_SIZE` | `25` | Adaptation batch size |
+| `TTA.COSA.BUFFER_CONTEXT_SIZE` | `5` | Base-adapter context size |
+| `TTA.COSA.VAR_WISE_GATING` | `True` | Variate-wise base-adapter gating |
+| `TTA.CORE.GATE_BIAS_INIT` | `-1.0` | Initial bias of the spectral gate |
+
+The SCR bottleneck defaults to rank `r = C` (number of variates). The implementation also reads an optional `TTA.CORE.SCR_RANK_MULT` value through `getattr`; its default is `1.0`. For high-dimensional datasets, consult the paper's fixed-rank experiments before changing the configuration.
+
+## Experiments
+
+The main paper evaluates **seven backbones** (DLinear, FreTS, OLS, PatchTST, iTransformer, MICN, Informer), **six datasets** (ETTh1, ETTh2, ETTm1, ETTm2, Weather, Exchange Rate), and prediction horizons `96`, `192`, `336`, and `720`. Electricity and Traffic are additionally used for scalability experiments.
+
+The dataset files are not included in this repository. Supply the benchmark files in the layout expected by `datasets/build.py`. The paper specifies the evaluation protocol and the full results.
 
 ### Baselines
 
-Replace the RESULT_DIR prefix with TAFAS, TAFAS_CORE, PETSA, DYNATTA, or COSA to run the corresponding baseline.
+The repository also includes baseline implementations. The adapter is selected by the `RESULT_DIR` prefix in `main.py` (for example `COSA`, `PETSA`, `DYNATTA`, or `TAFAS`). Use the same pretrained checkpoint and experimental protocol for comparisons.
 
-## Supported Backbones
+## Code provenance and licensing
 
-DLinear, iTransformer, PatchTST, FreTS, MICN, OLS, Informer
+This repository builds upon [TAFAS](https://github.com/kimanki/TAFAS), which identifies its license as **Modified MIT License (Non-Commercial with Permission)**. It also includes implementations of other test-time adaptation baselines. Please review the original projects' licenses and permission requirements before reusing or redistributing third-party code. A repository-wide license for the combined codebase is not asserted here.
 
-## Supported Datasets
+## Citation
 
-ETTh1, ETTh2, ETTm1, ETTm2, Weather, Exchange-Rate, Traffic, Electricity
+If you use this work, please cite:
 
-## License
-
-See LICENSE for details.
-
-## Acknowledgements
-
-This codebase is built upon the following open-source projects:
-
-- **TAFAS** ([Kim et al., 2025](https://arxiv.org/abs/2501.04970)) — the overall codebase structure, data loading, model training, and configuration system are adapted from the [TAFAS repository](https://github.com/kimanki/TAFAS), licensed under the Modified MIT License (Non-Commercial with Permission).
-- **COSA** ([Im and Kwon, 2026](https://openreview.net/forum?id=L7Z5wBMPrW)) and **TAFAS** serve as base adapters in our comparison framework.
-
-We thank the authors for making their code publicly available.
+```bibtex
+@article{deng2026core,
+  title={Correction-space Cross-variate Interaction for Test-time Adaptation in Time Series Forecasting},
+  author={Deng, Yuanyuan and Pechenizkiy, Mykola and Deng, Songgaojun},
+  journal={arXiv preprint arXiv:2609.34638},
+  year={2026}
+}
+```
