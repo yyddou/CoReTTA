@@ -8,7 +8,7 @@ CoRe studies **where cross-variate interaction should take place** in test-time 
 
 ## Setup
 
-Install the dependencies listed in `requirements.txt` in a compatible Python/PyTorch environment with CUDA support. The CoRe adapter currently uses `.cuda()`, so running it requires a CUDA-enabled PyTorch installation and a suitable GPU.
+Install the dependencies listed in `requirements.txt` in a compatible Python/PyTorch environment with CUDA support.
 
 ```bash
 pip install -r requirements.txt
