@@ -38,8 +38,6 @@ python main.py \
   TTA.CORE.GATE_BIAS_INIT -1.0
 ```
 
-This command is an **illustrative single run**. Paper results are reported under the evaluation protocol described in the manuscript, including averages over random seeds where indicated. Do not compare a single-run MSE directly with a multi-seed average.
-
 ### Train a backbone
 
 If a pretrained checkpoint is not available, train the corresponding backbone first:
